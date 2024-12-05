@@ -1,0 +1,54 @@
+.cardCountdownContainer {
+  background-color: #47595c;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  padding: 12px;
+}
+
+.cardCountdownContainer .bodyCardCountdownContainer {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+}
+
+.bodyCardCountdownContainer .countdownText {
+  font-size: 1.8rem;
+  font-weight: 300;
+  flex: 1;
+}
+
+.bodyCardCountdownContainer .iconContainer {
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  transition: background-color .15s;
+}
+.bodyCardCountdownContainer .iconContainer:hover,
+.bodyCardCountdownContainer .iconContainer:focus { background-color: rgba(0, 0, 0, .08); }
+
+.iconContainer .icon {
+  color: #e76d83; 
+  font-size: 1.2rem; 
+}
+
+.cardCountdownContainer .footerCardCountdownContainer {
+  background-color: #99ccce;
+  color: #323232;
+  border-radius: 20px;
+  font-size: .9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+}
+
+.footerCardCountdownContainer h4 { font-weight: 600; }
+.footerCardCountdownContainer p { font-weight: 500; }

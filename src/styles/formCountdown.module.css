@@ -1,0 +1,88 @@
+.formCountdownContainer {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
+  margin-bottom: 16px;
+  padding-bottom: 0;
+  transition: padding-bottom .15s;
+}
+
+.formCountdownIsActive { padding-bottom: 178px; }
+
+.formCountdownContainer .headerFormCountdownContainer { 
+  background-color: #393d3f;
+  cursor: pointer;
+  position: relative;
+  display: flex; 
+  align-items: center;
+  padding: 8px 0;
+  z-index: 2;
+}
+
+.headerFormCountdownContainer h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.iconContainer {
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 36px;
+  transition: background .15s;
+}
+.iconContainer:hover { background-color: rgba(0, 0, 0, .08); }
+
+.headerFormCountdownContainer .icon { 
+  font-size: 1.2rem; 
+  transform: rotate(0deg);
+  transition: transform .15s;
+}
+
+.formCountdownIsActive .icon { transform: rotate(-90deg); }
+
+.formCountdownContainer .formContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  padding: 12px 8px 16px 8px;
+  width: 100%;
+  transition: top .25s;
+}
+
+.formContainer .input {
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  padding: 0 12px;
+  height: 46px;
+  width: 100%;
+}
+.formContainer .input::placeholder { color: rgba(255, 255, 255, .65); }
+.formContainer .input:focus { outline: 2px solid royalblue; }
+
+.formContainer .buttonContainer {
+  background-color: royalblue;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .25);
+  border: none;
+  border-radius: 20px;
+  font-size: .9rem;
+  opacity: .85;
+  align-self: flex-end;
+  padding: 8px 18px;
+  transition: .15s;
+}
+.formContainer .buttonContainer:focus,
+.formContainer .buttonContainer:hover { opacity: 1; }
