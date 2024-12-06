@@ -5,14 +5,13 @@ import styles from '../styles/cardCountdown.module.css'
 
 export default function CardCountdown({ countdownData, handleDeleteCountdown }) {
   const [countdown, setCountdown] = useState(() => {
+    const targetDate = countdownData.countdownDate
     const currentDate = new Date()
-    const ajustMinDateInMS = currentDate.getTime() - (currentDate.getTimezoneOffset() * 60 * 1000);
-    const targetDate = new Date(countdownData.countdownCompletionDate)
 
-    const days = differenceInDays(targetDate, ajustMinDateInMS)
-    const hours = (differenceInHours(targetDate, ajustMinDateInMS) % 24) - 3
-    const minutes = differenceInMinutes(targetDate, ajustMinDateInMS) % 60
-    const seconds = differenceInSeconds(targetDate, ajustMinDateInMS) % 60
+    const days = differenceInDays(targetDate, currentDate)
+    const hours = differenceInHours(targetDate, currentDate)
+    const minutes = differenceInMinutes(targetDate, currentDate) % 60
+    const seconds = differenceInSeconds(targetDate, currentDate) % 60
 
     return {
       days: String(days).padStart(2, 0),
@@ -23,44 +22,45 @@ export default function CardCountdown({ countdownData, handleDeleteCountdown }) 
   })
 
   // Help with formatting to display the due date
-  const targetDate = new Date(countdownData.countdownCompletionDate)
-  const getConclusionDate = String(targetDate.getDate()).padStart(2, 0)
-  const getConclusionMonth = String(targetDate.getMonth() + 1).padStart(2, 0)
-  const getConclusionYear = String(targetDate.getFullYear())
+  const conclusionDate = countdownData.countdownDate
+  const getConclusionDate = String(conclusionDate.getDate())
+    .padStart(2, 0)
+  const getConclusionMonth = String(conclusionDate.getMonth())
+    .padStart(2, 0)
+  const getConclusionYear = String(conclusionDate.getFullYear())
 
   // Update Countdown
   useEffect(() => {
-    if(countdown.hours == 0 && countdown.minutes == 0 && countdown.seconds == 0) return
+    // Prevents counting when the scheduled date arrives
+    if(countdown.days == 0 && countdown.hours == 0 && countdown.minutes == 0 && countdown.seconds == 0) return 
+
+    // Will update the countdown
+    const targetDate = countdownData.countdownDate
 
     const interval = setInterval(() => {
-      setCountdown(() => {
-        const currentDate = new Date()
-        const ajustMinDateInMS = currentDate.getTime() - (currentDate.getTimezoneOffset() * 60 * 1000);
-        const targetDate = new Date(countdownData.countdownCompletionDate)
+      const currentDate = new Date()
 
-        const days = differenceInDays(targetDate, ajustMinDateInMS)
-        const hours = (differenceInHours(targetDate, ajustMinDateInMS) % 24) - 3
-        const minutes = differenceInMinutes(targetDate, ajustMinDateInMS) % 60
-        const seconds = differenceInSeconds(targetDate, ajustMinDateInMS) % 60
+      const days = differenceInDays(targetDate, currentDate)
+      const hours = differenceInHours(targetDate, currentDate)
+      const minutes = differenceInMinutes(targetDate, currentDate) % 60
+      const seconds = differenceInSeconds(targetDate, currentDate) % 60
 
-        return {
-          days: String(days).padStart(2, 0),
-          hours: String(hours).padStart(2, 0),
-          minutes: String(minutes).padStart(2, 0),
-          seconds: String(seconds).padStart(2, 0),
-        }
+      setCountdown({
+        days: String(days).padStart(2, 0),
+        hours: String(hours).padStart(2, 0),
+        minutes: String(minutes).padStart(2, 0),
+        seconds: String(seconds).padStart(2, 0),
       })
-
     }, 1000)
 
     return () => clearInterval(interval)
-  }, [countdown, countdownData])
+  }, [countdown])
 
   return (
     <li className={styles.cardCountdownContainer}>
       <div className={styles.bodyCardCountdownContainer}>
         <span className={styles.countdownText}> 
-          {countdown.hours}:{countdown.minutes}:{countdown.seconds} 
+          {countdown.hours}:{countdown.minutes}:{countdown.seconds}
         </span>
 
         <button 

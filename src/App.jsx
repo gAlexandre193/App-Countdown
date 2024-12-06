@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import FormCountdown from './components/FormCountdown';
 import CountdownCard from './components/CardCountdown';
 
@@ -18,10 +18,6 @@ export default function App() {
 
     setCountdownList(deleteCountdownItem)
   }
-
-  useEffect(() => {
-    console.log(countdownList)
-  }, [countdownList])
 
   return (
     <div className='wrapper'>

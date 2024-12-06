@@ -50,5 +50,13 @@
   padding: 12px;
 }
 
+.footerCardCountdownContainer h4,
+.footerCardCountdownContainer p,
+.footerCardCountdownContainer span { flex: 1; }
+
 .footerCardCountdownContainer h4 { font-weight: 600; }
-.footerCardCountdownContainer p { font-weight: 500; }
+.footerCardCountdownContainer span { text-align: center; }
+.footerCardCountdownContainer p { 
+  font-weight: 500; 
+  text-align: right;
+}
