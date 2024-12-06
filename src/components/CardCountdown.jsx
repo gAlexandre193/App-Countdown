@@ -5,7 +5,7 @@ import styles from '../styles/cardCountdown.module.css'
 
 export default function CardCountdown({ countdownData, handleDeleteCountdown }) {
   const [countdown, setCountdown] = useState(() => {
-    const targetDate = countdownData.countdownDate
+    const targetDate = new Date(countdownData.countdownDate)
     const currentDate = new Date()
 
     const days = differenceInDays(targetDate, currentDate)
@@ -22,7 +22,7 @@ export default function CardCountdown({ countdownData, handleDeleteCountdown }) 
   })
 
   // Help with formatting to display the due date
-  const conclusionDate = countdownData.countdownDate
+  const conclusionDate = new Date(countdownData.countdownDate)
   const getConclusionDate = String(conclusionDate.getDate())
     .padStart(2, 0)
   const getConclusionMonth = String(conclusionDate.getMonth())
@@ -35,7 +35,7 @@ export default function CardCountdown({ countdownData, handleDeleteCountdown }) 
     if(countdown.days == 0 && countdown.hours == 0 && countdown.minutes == 0 && countdown.seconds == 0) return 
 
     // Will update the countdown
-    const targetDate = countdownData.countdownDate
+    const targetDate = new Date(countdownData.countdownDate)
 
     const interval = setInterval(() => {
       const currentDate = new Date()

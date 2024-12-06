@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import FormCountdown from './components/FormCountdown';
 import CountdownCard from './components/CardCountdown';
 
 export default function App() {
-  const [countdownList, setCountdownList] = useState([]);
+  const [countdownList, setCountdownList] = useState(() => {
+    const getCountdownListOnLocalStorage = localStorage.getItem('@countdownList')
+
+    if(getCountdownListOnLocalStorage) return JSON.parse(getCountdownListOnLocalStorage)
+
+    return []
+  });
 
   // Actions
   const handleAddCountdown = (countdownData) => {
@@ -18,6 +24,12 @@ export default function App() {
 
     setCountdownList(deleteCountdownItem)
   }
+
+  useEffect(() => {
+    localStorage.setItem('@countdownList', JSON.stringify(countdownList))
+
+    console.log(JSON.parse(localStorage.getItem('@countdownList')))
+  }, [countdownList])
 
   return (
     <div className='wrapper'>
