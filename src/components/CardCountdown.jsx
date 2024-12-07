@@ -8,6 +8,13 @@ export default function CardCountdown({ countdownData, handleDeleteCountdown }) 
     const targetDate = new Date(countdownData.countdownDate)
     const currentDate = new Date()
 
+    if(targetDate < currentDate) return { 
+      days: '00', 
+      hours: '00', 
+      minutes: '00', 
+      seconds: '00' 
+    }
+
     const days = differenceInDays(targetDate, currentDate)
     const hours = differenceInHours(targetDate, currentDate)
     const minutes = differenceInMinutes(targetDate, currentDate) % 60
