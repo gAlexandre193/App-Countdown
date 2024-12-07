@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import FormCountdown from './components/FormCountdown';
-import CountdownCard from './components/CardCountdown';
+import FormCountdown from './components/FormCountdown'
+import CountdownCard from './components/CardCountdown'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function App() {
   const [countdownList, setCountdownList] = useState(() => {
@@ -23,12 +24,11 @@ export default function App() {
       countdown.id !== id)
 
     setCountdownList(deleteCountdownItem)
+    toast.error('Countdown Deletado')
   }
 
   useEffect(() => {
     localStorage.setItem('@countdownList', JSON.stringify(countdownList))
-
-    console.log(JSON.parse(localStorage.getItem('@countdownList')))
   }, [countdownList])
 
   return (
@@ -42,6 +42,15 @@ export default function App() {
           handleDeleteCountdown={handleDeleteCountdown}
         />)}
       </ul>  
+
+      <Toaster 
+        toastOptions={{
+          style: {
+            backgroundColor: '#1b1d1d',
+            color: '#fff',
+          }
+        }}
+      />
     </div>
   )
 }

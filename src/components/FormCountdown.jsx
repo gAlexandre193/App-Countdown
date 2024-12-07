@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import toast from 'react-hot-toast' 
 import { BsChevronLeft } from 'react-icons/bs'
 import styles from '../styles/formCountdown.module.css'
 
@@ -16,9 +17,15 @@ export default function FormCountdown({ handleAddCountdown }) {
     const convertCountdownDate = new Date(countdownDate)
     
     // Prevent registering the countdown
-    if(countdownTitle === '' || countdownDate === '') return
+    if(countdownTitle === '' || countdownDate === '') {
+      toast.error('Os campos devem ser preenchidos')
+      return
+    }
     // If the selected date is equal to or less than the current date
-    if(convertCountdownDate.getTime() <= currentDate.getTime()) return 
+    if(convertCountdownDate.getTime() <= currentDate.getTime()) {
+      toast.error('A data deve ser posterior a data atual')
+      return
+    } 
 
     // Register Countdown
     const countdownData = {
@@ -27,6 +34,7 @@ export default function FormCountdown({ handleAddCountdown }) {
     }
 
     handleAddCountdown(countdownData)
+    toast.success('Cadastrado')
 
     // Reset Inputs
     setCountdownTitle('')
