@@ -32,7 +32,7 @@ export default function CardCountdown({ countdownData, handleDeleteCountdown }) 
   const conclusionDate = new Date(countdownData.countdownDate)
   const getConclusionDate = String(conclusionDate.getDate())
     .padStart(2, 0)
-  const getConclusionMonth = String(conclusionDate.getMonth())
+  const getConclusionMonth = String(conclusionDate.getMonth()+1)
     .padStart(2, 0)
   const getConclusionYear = String(conclusionDate.getFullYear())
 
