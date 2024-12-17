@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
+import { BsSortUp, BsSortDown } from 'react-icons/bs';
+import toast, { Toaster } from 'react-hot-toast';
 import FormCountdown from './components/FormCountdown'
 import CountdownCard from './components/CardCountdown'
-import toast, { Toaster } from 'react-hot-toast';
 
 export default function App() {
   const [countdownList, setCountdownList] = useState(() => {
@@ -11,6 +12,7 @@ export default function App() {
 
     return []
   });
+  const [sort, setSort] = useState('Asc')
 
   // Actions
   const handleAddCountdown = (countdownData) => {
@@ -26,6 +28,8 @@ export default function App() {
     setCountdownList(deleteCountdownItem)
     toast.error('Countdown Deletado')
   }
+  const handleSortAsc = () => setSort('Asc')
+  const handleSortDesc = () => setSort('Desc')
 
   useEffect(() => {
     localStorage.setItem('@countdownList', JSON.stringify(countdownList))
@@ -35,12 +39,30 @@ export default function App() {
     <div className='wrapper'>
       <FormCountdown handleAddCountdown={handleAddCountdown} /> 
 
+      <div className='filterCountdownListContainer'>
+        <h3> Filtrar Countdown </h3>
+
+        {sort === 'Asc'
+          ? <button className='iconContainer' onClick={handleSortDesc}>
+            <BsSortUp className='icon' />
+          </button>
+
+          : <button className='iconContainer' onClick={handleSortAsc}>
+            <BsSortDown className='icon' />
+          </button>}
+
+      </div>
+
       <ul className='list-countdown'>
-        {countdownList.map((item) => <CountdownCard 
-          key={item.id} 
-          countdownData={item} 
-          handleDeleteCountdown={handleDeleteCountdown}
-        />)}
+        {countdownList
+          .sort((a, b) => sort === 'Asc'
+            ? new Date(a.countdownDate) - new Date(b.countdownDate)
+            : new Date(b.countdownDate) - new Date(a.countdownDate))
+          .map((item) => <CountdownCard 
+            key={item.id} 
+            countdownData={item} 
+            handleDeleteCountdown={handleDeleteCountdown}
+          />)}
       </ul>  
 
       <Toaster 

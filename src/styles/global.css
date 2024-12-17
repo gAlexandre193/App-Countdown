@@ -28,4 +28,37 @@ body {
   margin-bottom: 8px;
 }
 
+.wrapper .filterCountdownListContainer {
+  border-bottom: 1px solid rgba(255, 255, 255, .15);
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+}
+
+.filterCountdownListContainer h3 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  flex: 1;
+}
+
+.filterCountdownListContainer .iconContainer {
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 32px;
+  transition: background-color .15s;
+}
+
+.filterCountdownListContainer > .iconContainer .icon { font-size: 1.3rem; }
+
+.filterCountdownListContainer .iconContainer:hover,
+.filterCountdownListContainer .iconContainer:focus { background-color: rgba(0, 0, 0, .08); }
+
 .list-countdown { list-style: none; }
